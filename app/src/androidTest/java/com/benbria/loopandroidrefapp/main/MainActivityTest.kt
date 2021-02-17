@@ -1,7 +1,5 @@
 package com.benbria.loopandroidrefapp.main
 
-import android.view.View
-import android.widget.TextView
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
@@ -45,18 +43,18 @@ class MainActivityTest {
 
     @After
     fun tearDown() {
+        mActivityTestRule.finishActivity()
     }
 
     @Test
     fun onCreate() {
-        mActivityTestRule.activity.findViewById<TextView>(R.id.textview)?.importantForAutofill = View.IMPORTANT_FOR_AUTOFILL_NO
 
         Espresso.onView(withId(R.id.webview_container))
             .check(matches(isDisplayed()))
 
         Thread.sleep(2000);
 
-        Espresso.onView(withId(R.id.textview))
+        Espresso.onView(withId(R.id.button))
             .check(matches(isDisplayed()))
             .perform(closeSoftKeyboard(),click())
 

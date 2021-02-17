@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        textview.setOnClickListener {
+        button.setOnClickListener {
             mainViewModel.view(baseContext,"id1", object : ViewListener {
                 override fun onViewClose() {
                     webview_container.removeAllViews()
