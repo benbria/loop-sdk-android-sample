@@ -6,11 +6,10 @@ import com.benbria.loopandroidsdk.core.Loop
 import com.benbria.loopandroidsdk.data.listeners.InitListener
 import com.benbria.loopandroidsdk.domain.entities.Credentials
 import com.benbria.loopandroidsdk.domain.entities.User
+import org.koin.android.ext.koin.androidContext
 import org.koin.android.logger.AndroidLogger
 import org.koin.core.KoinApplication
-import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
-import java.util.*
 
 class LoopApplication: Application() {
 
@@ -24,6 +23,12 @@ class LoopApplication: Application() {
 
         instance = this
 
+        startKoin {
+            androidContext(applicationContext)
+            modules(mainModules)
+        }
+        KoinApplication.logger = AndroidLogger()
+
         Loop.getInstance(this).init(Credentials(), User(), object: InitListener {
             override fun onInitCompleted(surveys: List<String>) {
 
@@ -33,9 +38,5 @@ class LoopApplication: Application() {
 
             }
         })
-
-//        startKoin { modules(mainModules) }
-        loadKoinModules(mainModules)
-        KoinApplication.logger = AndroidLogger()
     }
 }
