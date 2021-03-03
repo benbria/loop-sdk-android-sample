@@ -20,48 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         button_survey.setOnClickListener {
             webview_container.removeAllViews()
-
-            mainViewModel.view(baseContext, "surveyid1", null, object : ViewListener {
-                override fun onViewClose() {
-                    webview_container.removeAllViews()
-                }
-
-                override fun onViewCreateError(message: String) {
-                }
-
-                override fun onViewCreated(view: LoopWebView) {
-                    val lp = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-                    webview_container.addView(view, lp)
-                }
-
-                override fun onViewError(message: String) {
-                }
-            })
-        }
-
-        button_survey_with_location.setOnClickListener {
-            webview_container.removeAllViews()
-            mainViewModel.view(baseContext, "surveyid1", "0079", object : ViewListener {
-                override fun onViewClose() {
-                    webview_container.removeAllViews()
-                }
-
-                override fun onViewCreateError(message: String) {
-                }
-
-                override fun onViewCreated(view: LoopWebView) {
-                    val lp = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-                    webview_container.addView(view, lp)
-                }
-
-                override fun onViewError(message: String) {
-                }
-            })
-        }
-
-        button_messenger.setOnClickListener {
-            webview_container.removeAllViews()
-            mainViewModel.view(baseContext, "chfwebmessenger", "00033", object : ViewListener {
+            mainViewModel.view(baseContext, "00033", object : ViewListener {
                 override fun onViewClose() {
                     webview_container.removeAllViews()
                 }

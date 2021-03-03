@@ -11,7 +11,7 @@ class MainViewModel() : BaseViewModel() {
 
     }
 
-    fun view(context: Context, channelId: String, locationId: String? = null, viewListener: ViewListener? = null) =
-        Loop.getInstance(context).view(channelId, locationId, UserInfo().apply { this.name = "John" }, viewListener)
+    fun view(context: Context, experienceId: String, viewListener: ViewListener? = null) =
+        Loop.getInstance(context).view(experienceId, UserInfo().apply { this.name = "John" }, viewListener)
 
 }

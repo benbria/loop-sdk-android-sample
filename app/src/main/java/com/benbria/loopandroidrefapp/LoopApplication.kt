@@ -4,6 +4,7 @@ import android.app.Application
 import com.benbria.loopandroidrefapp.di.mainModules
 import com.benbria.loopandroidsdk.core.Loop
 import com.benbria.loopandroidsdk.data.listeners.InitListener
+import com.benbria.loopandroidsdk.data.view.LoopWebView
 import com.benbria.loopandroidsdk.domain.entities.Configuration
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.logger.AndroidLogger
@@ -31,15 +32,16 @@ class LoopApplication : Application() {
         Loop.getInstance(this).init(
                 Configuration().apply {
                     this.apiKey = "api_key"
-                    this.projectName = "demo"
+                    this.mobileChannelId = "channel_id"
                 },
                 object : InitListener {
-                    override fun onInitCompleted(surveys: List<String>) {
-
+                    override fun displayRequested(webView: LoopWebView) {
                     }
 
-                    override fun onInitError(message: String) {
+                    override fun failure(message: String) {
+                    }
 
+                    override fun ready() {
                     }
                 })
     }
