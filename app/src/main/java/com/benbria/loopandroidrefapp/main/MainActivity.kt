@@ -14,51 +14,55 @@ import com.benbria.loopandroidsdk.domain.entities.Configuration
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ViewListener, InitListener {
 
     private val mainViewModel: MainViewModel by viewModel()
+    private val loopInstance = Loop.getInstance(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Loop.getInstance(this).init(
+        loopInstance.init(
             Configuration().apply {
                 this.apiKey = "api_key"
                 this.mobileChannelId = "channel_id"
-            },
-            object : InitListener {
-                override fun displayRequested(webView: LoopWebView) {
-                    val lp = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-                    webview_container.addView(webView, lp)
-                }
-
-                override fun failure(message: String) {
-                }
-
-                override fun ready(initResponse: InitResponse) {
-
-                }
-            })
+            },this)
 
         button_survey.setOnClickListener {
             webview_container.removeAllViews()
-            mainViewModel.view(baseContext, "00033", object : ViewListener {
-                override fun onViewClose() {
-                    webview_container.removeAllViews()
-                }
-
-                override fun onViewCreateError(message: String) {
-                }
-
-                override fun onViewCreated(view: LoopWebView) {
-                    val lp = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-                    webview_container.addView(view, lp)
-                }
-
-                override fun onViewError(message: String) {
-                }
-            })
+            mainViewModel.view(baseContext, "604fa23dd568b8a48631c150", this)
         }
     }
+
+    // ViewListener Callbacks
+    override fun onViewClose() {
+        webview_container.removeAllViews()
+    }
+
+    override fun onViewCreateError(message: String) {
+
+    }
+
+    override fun onViewCreated(view: LoopWebView) {
+        val lp = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        webview_container.addView(view, lp)
+    }
+
+    override fun onViewError(message: String) {
+
+    }
+
+    // InitListener Callbacks
+    override fun displayRequested(experienceId: String) {
+        mainViewModel.view(baseContext, experienceId, this)
+    }
+
+    override fun failure(message: String) {
+    }
+
+    override fun ready(initResponse: InitResponse) {
+    }
+
+
 }
