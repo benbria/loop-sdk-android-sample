@@ -1,22 +1,22 @@
 package com.benbria.loopandroidrefapp.main
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.ViewGroup
-import android.widget.LinearLayout
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.benbria.loopandroidrefapp.R
 import com.benbria.loopandroidsdk.core.Loop
 import com.benbria.loopandroidsdk.data.entities.InitResponse
 import com.benbria.loopandroidsdk.data.listeners.InitListener
-import com.benbria.loopandroidsdk.data.listeners.ViewListener
-import com.benbria.loopandroidsdk.data.view.LoopWebView
 import com.benbria.loopandroidsdk.domain.entities.Configuration
 import kotlinx.android.synthetic.main.activity_main.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity(), ViewListener, InitListener {
 
-    private val mainViewModel: MainViewModel by viewModel()
+class MainActivity : AppCompatActivity(), InitListener {
+
+    private val LOG_TAG = MainActivity::class.java.simpleName
+
     private val loopInstance = Loop.getInstance(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,41 +24,48 @@ class MainActivity : AppCompatActivity(), ViewListener, InitListener {
         setContentView(R.layout.activity_main)
 
         loopInstance.init(
-            Configuration().apply {
-                this.apiKey = "api_key"
-                this.mobileChannelId = "channel_id"
-            },this)
+            Configuration("6054c5146df5a259081d52c2")
+                .apply {
+                    this.accountId = "4f0f298c1808714405000002"
+                }, this
+        )
 
         button_survey.setOnClickListener {
-            webview_container.removeAllViews()
-            mainViewModel.view(baseContext, "604fa23dd568b8a48631c150", this)
+            val intent = Intent(baseContext, WebviewActivity::class.java)
+            intent.putExtra("EXTRA_EXPERIENCE_ID", "5ed581ce61a3dcc4c627c91d")
+            startActivity(intent)
         }
-    }
 
-    // ViewListener Callbacks
-    override fun onViewClose() {
-        webview_container.removeAllViews()
-    }
+        button_messenger.setOnClickListener {
+            val intent = Intent(baseContext, WebviewActivity::class.java)
+            intent.putExtra("EXTRA_EXPERIENCE_ID", "5ed64f7abee23d481e63f28e")
+            startActivity(intent)
+        }
 
-    override fun onViewCreateError(message: String) {
+        button_nlp.setOnClickListener {
+            val intent = Intent(baseContext, WebviewActivity::class.java)
+            intent.putExtra("EXTRA_EXPERIENCE_ID", "60469ce6a54f63642a698a13")
+            startActivity(intent)
+        }
 
-    }
+        fab.setOnClickListener {
+            val intent = Intent(baseContext, WebviewActivity::class.java)
+            intent.putExtra("EXTRA_EXPERIENCE_ID", it.tag.toString())
+            startActivity(intent)
 
-    override fun onViewCreated(view: LoopWebView) {
-        val lp = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        webview_container.addView(view, lp)
-    }
-
-    override fun onViewError(message: String) {
-
+            fab.tag = null
+            fab.visibility = View.GONE
+        }
     }
 
     // InitListener Callbacks
     override fun displayRequested(experienceId: String) {
-        mainViewModel.view(baseContext, experienceId, this)
+        fab.tag = experienceId
+        fab.visibility = View.VISIBLE
     }
 
     override fun failure(message: String) {
+        Log.i(LOG_TAG, message)
     }
 
     override fun ready(initResponse: InitResponse) {
