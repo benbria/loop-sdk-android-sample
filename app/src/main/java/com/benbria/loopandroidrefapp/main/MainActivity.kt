@@ -31,25 +31,25 @@ class MainActivity : AppCompatActivity(), InitListener {
         )
 
         button_survey.setOnClickListener {
-            val intent = Intent(baseContext, WebviewActivity::class.java)
+            val intent = Intent(baseContext, WebViewActivity::class.java)
             intent.putExtra("EXTRA_EXPERIENCE_ID", "5ed581ce61a3dcc4c627c91d")
             startActivity(intent)
         }
 
         button_messenger.setOnClickListener {
-            val intent = Intent(baseContext, WebviewActivity::class.java)
+            val intent = Intent(baseContext, WebViewActivity::class.java)
             intent.putExtra("EXTRA_EXPERIENCE_ID", "5ed64f7abee23d481e63f28e")
             startActivity(intent)
         }
 
         button_nlp.setOnClickListener {
-            val intent = Intent(baseContext, WebviewActivity::class.java)
+            val intent = Intent(baseContext, WebViewActivity::class.java)
             intent.putExtra("EXTRA_EXPERIENCE_ID", "60469ce6a54f63642a698a13")
             startActivity(intent)
         }
 
         fab.setOnClickListener {
-            val intent = Intent(baseContext, WebviewActivity::class.java)
+            val intent = Intent(baseContext, WebViewActivity::class.java)
             intent.putExtra("EXTRA_EXPERIENCE_ID", it.tag.toString())
             startActivity(intent)
 

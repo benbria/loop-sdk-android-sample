@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".main.WebviewActivity"
+            android:name=".main.WebViewActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
     </application>

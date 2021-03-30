@@ -12,7 +12,7 @@ import com.benbria.loopandroidsdk.data.view.LoopWebView
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class WebviewActivity : AppCompatActivity(), ViewListener {
+class WebViewActivity : AppCompatActivity(), ViewListener {
     private val mainViewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
