@@ -14,14 +14,23 @@ buildscript {
     }
 }
 
+plugins {
+    id("com.diffplug.spotless") version "5.11.1"
+}
+
+
 allprojects {
     repositories {
         mavenLocal()
         google()
         jcenter()
+        maven {
+            url "https://maven.pkg.github.com/benbria/sdk_android"
+            name "GitHubPackages"
+            credentials {
+                username = project.findProperty("github_username") ?: System.getenv("GITHUB_ACTOR")
+                password = project.findProperty("github_password") ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }
