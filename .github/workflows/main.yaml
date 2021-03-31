@@ -41,7 +41,7 @@ jobs:
 
       - name: Build
         run: |
-          ./gradlew test
+          ./gradlew build
         env:
           GITHUB_USER: ${{ secrets.GITHUB_USER }}
           TOKEN: ${{ secrets.TOKEN }}

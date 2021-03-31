@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity(), InitListener {
         setContentView(R.layout.activity_main)
 
         loopInstance.init(
-            Configuration("6054c5146df5a259081d52c2")
+            Configuration(mobileChannelId = "6054c5146df5a259081d52c2")
                 .apply {
                     this.accountId = "4f0f298c1808714405000002"
                 }, this
