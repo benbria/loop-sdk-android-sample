@@ -38,6 +38,9 @@ allprojects {
             authentication {
                 header(HttpHeaderAuthentication)
             }
+            content {
+                includeGroup "com.benbria"
+            }
         }
     }
 }
