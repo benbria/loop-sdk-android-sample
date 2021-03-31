@@ -27,7 +27,11 @@ jobs:
       - name: Lint & Spotless Check
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
         run: |
+          echo "Starting Lint"
+          echo ${{ secrets.GITHUB_TOKEN }}
+          echo ${{ secrets.GITHUB_ACTOR }}
           ./gradlew spotlessCheck
           ./gradlew lint
 
