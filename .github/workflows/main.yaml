@@ -26,8 +26,8 @@ jobs:
 
       - name: Lint & Spotless Check
         env:
-          GITHUB_USER: "sukruavcuoglu"
-          GITHUB_TOKEN: "714e9fc396e8825c7d3da2b942476ac304abe9b8"
+          GITHUB_USER: ${{ secrets.GITHUB_USER }}
+          TOKEN: ${{ secrets.TOKEN }}
         run: |
           ./gradlew spotlessCheck
           ./gradlew lint
@@ -36,12 +36,12 @@ jobs:
         run: |
           ./gradlew test
         env:
-          GITHUB_USER: "sukruavcuoglu"
-          GITHUB_TOKEN: "714e9fc396e8825c7d3da2b942476ac304abe9b8"
+          GITHUB_USER: ${{ secrets.GITHUB_USER }}
+          TOKEN: ${{ secrets.TOKEN }}
 
       - name: Build
         run: |
           ./gradlew test
         env:
-          GITHUB_USER: "sukruavcuoglu"
-          GITHUB_TOKEN: "714e9fc396e8825c7d3da2b942476ac304abe9b8"
+          GITHUB_USER: ${{ secrets.GITHUB_USER }}
+          TOKEN: ${{ secrets.TOKEN }}
