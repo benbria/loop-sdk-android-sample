@@ -26,7 +26,7 @@ jobs:
 
       - name: Lint & Spotless Check
         env:
-          GITHUB_USER: ${{ secrets.GITHUB_USER }}
+          GITHUB_USER: ${{ secrets.USERNAME }}
           TOKEN: ${{ secrets.TOKEN }}
         run: |
           ./gradlew spotlessCheck
@@ -36,12 +36,12 @@ jobs:
         run: |
           ./gradlew test
         env:
-          GITHUB_USER: ${{ secrets.GITHUB_USER }}
+          GITHUB_USER: ${{ secrets.USERNAME }}
           TOKEN: ${{ secrets.TOKEN }}
 
       - name: Build
         run: |
           ./gradlew build
         env:
-          GITHUB_USER: ${{ secrets.GITHUB_USER }}
+          GITHUB_USER: ${{ secrets.USERNAME }}
           TOKEN: ${{ secrets.TOKEN }}
