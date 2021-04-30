@@ -53,8 +53,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ grep "versionName" app/build.gradle | awk '{print $2}' | tr -d \''"\' }}
+          release_name: Release ${{ grep "versionName" app/build.gradle | awk '{print $2}' | tr -d \''"\' }}
           draft: false
           prerelease: false
 
@@ -66,5 +66,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
           asset_path: loop-ref-app.apk
-          asset_name: loop-ref-app
+          asset_name: loop-ref-app.apk
           asset_content_type: application/zip
