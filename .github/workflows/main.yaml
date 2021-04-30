@@ -42,7 +42,7 @@ jobs:
       - name: Build
         run: |
           ./gradlew build
-          mv app/build/outputs/release/app-release.apk loop-ref-app.apk
+          mv app/build/outputs/apk/release/app-release.apk loop-ref-app.apk
         env:
           GITHUB_USER: ${{ secrets.USERNAME }}
           TOKEN: ${{ secrets.TOKEN }}
