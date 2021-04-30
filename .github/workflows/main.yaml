@@ -48,8 +48,8 @@ jobs:
           TOKEN: ${{ secrets.TOKEN }}
 
       - name: Get version
-          id: get_version
-          run: echo "::set-output name=version::$(grep "versionName" app/build.gradle | awk '{print $2}' | tr -d \''"\')"
+        id: get_version
+        run: echo "::set-output name=version::$(grep "versionName" app/build.gradle | awk '{print $2}' | tr -d \''"\')"
 
       - name: Create Release
         id: create_release
